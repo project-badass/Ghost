@@ -3,10 +3,14 @@ var config = require('../config'),
     checkSSL;
 
 function isSSLrequired(isAdmin, configUrl, forceAdminSSL) {
-    var forceSSL = url.parse(configUrl).protocol === 'https:' ? true : false;
-    if (forceSSL || (isAdmin && forceAdminSSL)) {
-        return true;
-    }
+//     var forceSSL = url.parse(configUrl).protocol === 'https:' ? true : false;
+//     if (forceSSL || (isAdmin && forceAdminSSL)) {
+//         return true;
+//     }
+//     return false;
+
+    // Heroku does not propogate the `X-Forwarded-For` from CloudFlare
+    // and as such we end up in a redirect loop ... this avoids it
     return false;
 }
 
